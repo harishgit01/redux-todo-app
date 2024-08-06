@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const todoSlice = createSlice({
-  name: " Todo App",
+export const productSlice = createSlice({
+  name: "Product App",
   initialState: {
-    value: [],
+    products: [],
   },
   reducers: {
-    add: (state, action) => {
-      state.value.push(action.payload);
+    addProduct: (state, action) => {
+      state.products.push(action.payload);
     },
-    remove: (state, action) => {
-      state.value.splice(action.payload, 1);
+    removeProduct: (state, action) => {
+      state.products.splice(action.payload, 1);
+    },
+    editProduct: (state, action) => {
+      const { index, newProduct } = action.payload;
+      if (index >= 0 && index < state.products.length) {
+        state.products[index] = newProduct;
+      }
     },
   },
 });
 
-export const { add, remove } = todoSlice.actions;
-export default todoSlice.reducer;
+export const { addProduct, removeProduct, editProduct } = productSlice.actions;
+export default productSlice.reducer;
